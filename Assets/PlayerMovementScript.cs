@@ -5,10 +5,14 @@ using UnityEngine;
 public class PlayerMovementScript : MonoBehaviour
 {
     // Start is called before the first frame update
-
+    [Header("General movement")]
     public Vector3 moveDirection;
-    public float speed;
+    public float forceScalar;
     public float rotationSpeed;
+    [Header("Stroke settings")]
+    public float strokeForce;
+    public float forceTimer;
+    
     void Start()
     {
 
@@ -20,6 +24,8 @@ public class PlayerMovementScript : MonoBehaviour
         ReadMovementInput();
         ApplyMovement();
         ApplyRotation();
+        ReadStrokeInput();
+
     }
 
     void ReadMovementInput()
@@ -32,9 +38,20 @@ public class PlayerMovementScript : MonoBehaviour
 
     void ApplyMovement()
     {
-        Vector3 finalDirection = Camera.main.transform.right * moveDirection.x + Camera.main.transform.forward * moveDirection.z;
-        finalDirection.Normalize();
-        transform.Translate(speed * Time.deltaTime * finalDirection, Space.World);
+        Vector3 finalDirection;
+        if (! (moveDirection == Vector3.zero) && Vector3.Magnitude(GetComponent<Rigidbody>().velocity) < 10)
+        {
+        
+            finalDirection = Camera.main.transform.right * moveDirection.x + Camera.main.transform.forward * moveDirection.z;
+
+            finalDirection.Normalize();
+
+            GetComponent<Rigidbody>().AddForce(forceScalar * finalDirection, ForceMode.Impulse); ;
+
+
+        }
+        
+
     }
 
     void ApplyRotation()
@@ -42,5 +59,25 @@ public class PlayerMovementScript : MonoBehaviour
         Quaternion targetRotation = Camera.main.transform.rotation;
 
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+    }
+
+   
+
+    void ReadStrokeInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && forceTimer <= 0)
+        {
+            ApplyStroke();
+            forceTimer = 0.5f;
+        }
+        else if (forceTimer > 0)
+        {
+            forceTimer -= Time.deltaTime;
+        }
+    }
+
+    void ApplyStroke()
+    {
+        GetComponent<Rigidbody>().AddForce(strokeForce * Camera.main.transform.forward, ForceMode.Impulse);
     }
 }
