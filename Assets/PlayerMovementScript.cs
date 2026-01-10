@@ -65,7 +65,7 @@ public class PlayerMovementScript : MonoBehaviour
 
     void ReadStrokeInput()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && forceTimer <= 0)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && forceTimer <= 0)
         {
             ApplyStroke();
             forceTimer = 0.5f;
