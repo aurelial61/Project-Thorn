@@ -80,4 +80,9 @@ public class PlayerMovementScript : MonoBehaviour
     {
         GetComponent<Rigidbody>().AddForce(strokeForce * Camera.main.transform.forward, ForceMode.Impulse);
     }
+
+    void SpearAttack()
+    {
+        
+    }
 }
