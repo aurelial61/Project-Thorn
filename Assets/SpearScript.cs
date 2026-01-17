@@ -5,12 +5,22 @@ using UnityEngine;
 public class SpearScript : MonoBehaviour
 {
     // Start is called before the first frame update
-    public int attackState;
+    
     public float attackSpeed;
     public float reach;
+    public int damage;
+    public CapsuleCollider theCollider;
+    public enum AttackState
+    {
+        Inactive,
+        Stab,
+        Return,
+    }
+    public AttackState currentAttackState;
     void Start()
     {
-        
+        theCollider = GetComponent<CapsuleCollider>();
+        ChangeState(AttackState.Inactive);
     }
 
     // Update is called once per frame
@@ -20,37 +30,101 @@ public class SpearScript : MonoBehaviour
         {
             StartAttack();
         }
-        switch (attackState)
-        {
-            case 1:
-                if (transform.localPosition.z <= reach)
-                {
-                    transform.localPosition += new Vector3(0, 0, Time.deltaTime * attackSpeed);
-                    break;
-                }
-                attackState = 2;
-                break;
-
-            case 2:
-                if (transform.localPosition.z > 0)
-                {
-                    transform.localPosition += new Vector3(0, 0, -Time.deltaTime * attackSpeed);
-                    break;
-                }
-                attackState = 0;
-                transform.localPosition = new Vector3(0.6f, 0, 0);
-                break;
-        }
+        UpdateState(currentAttackState);
+        
     }
 
     void StartAttack()
     {
-        if (attackState == 0)
+        if (currentAttackState == AttackState.Inactive)
         {
-            attackState = 1;
+            ChangeState(AttackState.Stab);
             
         }
     }
 
-   
+    public void ChangeState(AttackState state)
+    {
+        ExitState(currentAttackState);
+        currentAttackState = state;
+        EnterState(currentAttackState);
+    }
+
+    public void ExitState(AttackState exit)
+    {
+        switch (exit)
+        {
+            case AttackState.Inactive:
+                break;
+            case AttackState.Stab:
+                break;
+            case AttackState.Return:
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void EnterState(AttackState enter)
+    {
+        switch (enter)
+        {
+            case AttackState.Inactive:
+                transform.localPosition = new Vector3(0.6f, 0, 0);
+                theCollider.enabled = false;
+                break;
+            case AttackState.Stab:
+                theCollider.enabled = true;
+                break;
+            case AttackState.Return:
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void UpdateState(AttackState update)
+    {
+        switch (update)
+        {
+            case AttackState.Inactive:
+                break;
+            case AttackState.Stab:
+                if (transform.localPosition.z > reach)
+                {
+                    ChangeState(AttackState.Return);
+                    break;
+                }
+                
+                transform.localPosition += new Vector3(0, 0, Time.deltaTime * attackSpeed);
+                break;
+                
+
+            case AttackState.Return:
+                if (transform.localPosition.z < 0)
+                {
+                    ChangeState(AttackState.Inactive);
+                    break;
+                }
+                
+                transform.localPosition += new Vector3(0, 0, -Time.deltaTime * attackSpeed);
+                break;
+                
+                
+            default:
+                break;
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if ((currentAttackState == AttackState.Stab || currentAttackState == AttackState.Return) && other.gameObject.tag == "Enemy")
+        {
+            if (other.TryGetComponent(out Health health))
+            {
+                health.TakeDamage(2);
+            }
+        }
+    }
+
+
 }
