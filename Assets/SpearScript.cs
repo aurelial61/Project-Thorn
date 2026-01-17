@@ -9,6 +9,8 @@ public class SpearScript : MonoBehaviour
     public float attackSpeed;
     public float reach;
     public int damage;
+    
+    public Vector3 defaultPos;
     public CapsuleCollider theCollider;
     public enum AttackState
     {
@@ -21,20 +23,18 @@ public class SpearScript : MonoBehaviour
     {
         theCollider = GetComponent<CapsuleCollider>();
         ChangeState(AttackState.Inactive);
+        transform.position = defaultPos;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            StartAttack();
-        }
+        
         UpdateState(currentAttackState);
         
     }
 
-    void StartAttack()
+    public void StartAttack()
     {
         if (currentAttackState == AttackState.Inactive)
         {
@@ -70,7 +70,7 @@ public class SpearScript : MonoBehaviour
         switch (enter)
         {
             case AttackState.Inactive:
-                transform.localPosition = new Vector3(0.6f, 0, 0);
+                transform.localPosition = defaultPos;
                 theCollider.enabled = false;
                 break;
             case AttackState.Stab:
@@ -90,7 +90,7 @@ public class SpearScript : MonoBehaviour
             case AttackState.Inactive:
                 break;
             case AttackState.Stab:
-                if (transform.localPosition.z > reach)
+                if (transform.localPosition.z > defaultPos.z + reach)
                 {
                     ChangeState(AttackState.Return);
                     break;
@@ -101,7 +101,7 @@ public class SpearScript : MonoBehaviour
                 
 
             case AttackState.Return:
-                if (transform.localPosition.z < 0)
+                if (transform.localPosition.z < defaultPos.z)
                 {
                     ChangeState(AttackState.Inactive);
                     break;

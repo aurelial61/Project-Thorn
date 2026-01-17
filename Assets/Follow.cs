@@ -3,9 +3,7 @@ using UnityEngine;
 
 public class Follow : MonoBehaviour {
 
-    public Transform followTarget;
-
-    private void Update()
+    public void FollowTarget(Transform target, float speed)
     {
         
     }

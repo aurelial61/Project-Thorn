@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerMovementScript : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class PlayerMovementScript : MonoBehaviour
     [Header("Stroke settings")]
     public float strokeForce;
     public float forceTimer;
+    [Header("Attacks")]
+    public UnityEvent spearAttack = new UnityEvent();
     
     void Start()
     {
@@ -25,7 +28,7 @@ public class PlayerMovementScript : MonoBehaviour
         ApplyMovement();
         ApplyRotation();
         ReadStrokeInput();
-
+        ReadAttackInput();
     }
 
     void ReadMovementInput()
@@ -81,8 +84,11 @@ public class PlayerMovementScript : MonoBehaviour
         GetComponent<Rigidbody>().AddForce(strokeForce * Camera.main.transform.forward, ForceMode.Impulse);
     }
 
-    void SpearAttack()
+    void ReadAttackInput()
     {
-        
+        if (Input.GetMouseButtonDown(0))
+        {
+            spearAttack.Invoke();
+        }
     }
 }
