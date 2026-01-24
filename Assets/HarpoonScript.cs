@@ -15,6 +15,8 @@ public class HarpoonScript : MonoBehaviour
     public State currentState = State.Idling;
 
     private float Timer;
+
+    public int damage;
     public enum State
     {
         Going,
@@ -102,5 +104,16 @@ public class HarpoonScript : MonoBehaviour
     private void CleanUp()
     {
         originalHarpoon.SetActive(true);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            if (other.TryGetComponent(out Health health))
+            {
+                health.TakeDamage(2);
+            }
+        }
     }
 }

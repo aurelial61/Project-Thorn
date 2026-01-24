@@ -43,13 +43,14 @@ public class PlayerMovementScript : MonoBehaviour
         // attack
         if (!fish)
         {
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                HarpoonAttack();
-            }
+            //if (Input.GetKeyDown(KeyCode.Q))
+            //{
+                ReadAttackInput();
+                //HarpoonAttack();
+            //}
 
         }
-        ReadAttackInput();
+        //ReadAttackInput();
     }
 
     void ReadMovementInput()
@@ -115,5 +116,19 @@ public class PlayerMovementScript : MonoBehaviour
         spawnedHarpoon = Instantiate(harpoonPrefab, harpoon.transform.position, harpoon.transform.rotation);
         spawnedHarpoon.Throw(harpoon, hForce, 20, Camera.main.transform.forward);
         harpoon.gameObject.SetActive(false);
+    }
+
+    void ReadAttackInput()
+    {
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            spearAttack.Invoke();
+        }
+
+        else if (Input.GetMouseButtonDown(1))
+        {
+            HarpoonAttack();
+        }
     }
 }
