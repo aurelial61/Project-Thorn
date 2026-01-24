@@ -25,10 +25,15 @@ public class PlayerMovementScript : MonoBehaviour
     void Update()
     {
         ReadMovementInput();
-        ApplyMovement();
+        
         ApplyRotation();
         ReadStrokeInput();
         ReadAttackInput();
+    }
+
+    private void FixedUpdate()
+    {
+        ApplyMovement();
     }
 
     void ReadMovementInput()
@@ -49,7 +54,7 @@ public class PlayerMovementScript : MonoBehaviour
 
             finalDirection.Normalize();
 
-            GetComponent<Rigidbody>().AddForce(forceScalar * finalDirection, ForceMode.Impulse); ;
+            GetComponent<Rigidbody>().AddForce(forceScalar * finalDirection, ForceMode.Impulse); 
 
 
         }

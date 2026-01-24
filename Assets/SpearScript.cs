@@ -122,6 +122,7 @@ public class SpearScript : MonoBehaviour
             if (other.TryGetComponent(out Health health))
             {
                 health.TakeDamage(2);
+                Debug.Log(currentAttackState);
             }
         }
     }
