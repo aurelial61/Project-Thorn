@@ -5,6 +5,15 @@ using UnityEngine;
 public class BasicEnemyScript : MonoBehaviour
 {
     // Start is called before the first frame update
+
+    public enum EnemyState
+    {
+        Idle,
+        Following,
+        Charging,
+        Cooldown,
+        Attacking
+    }
     
     void Start()
     {
@@ -14,13 +23,6 @@ public class BasicEnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        OnUpdate();
-    }
-
-    protected virtual void OnUpdate()
-    {
-        
-        
         
     }
 

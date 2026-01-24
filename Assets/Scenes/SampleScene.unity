@@ -379,12 +379,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ccae3f9fff3ee4a8cb0d72ad651d08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSpeed: 40
+  attackSpeed: 20
   reach: 1
   damage: 2
   defaultPos: {x: 0.6, y: -0.1, z: 1}
   theCollider: {fileID: 0}
-  currentAttackState: 0
 --- !u!54 &144053562
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1056,6 +1055,9 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 64
+  detected: 0
+  range: 25
+  detectAngle: 20
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

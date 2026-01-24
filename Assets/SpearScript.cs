@@ -9,122 +9,71 @@ public class SpearScript : MonoBehaviour
     public float attackSpeed;
     public float reach;
     public int damage;
-    
+    public SpearInactiveState inactiveState;
+    public SpearStabState stabState;
+    public SpearReturnState returnState;
     public Vector3 defaultPos;
     public CapsuleCollider theCollider;
-    public enum AttackState
+    public State currentState;
+
+    private void Awake()
     {
-        Inactive,
-        Stab,
-        Return,
+        inactiveState = new SpearInactiveState(this);
+        stabState = new SpearStabState(this);
+        returnState = new SpearReturnState(this);
+        
     }
-    public AttackState currentAttackState;
     void Start()
     {
         theCollider = GetComponent<CapsuleCollider>();
-        ChangeState(AttackState.Inactive);
+        ChangeState(inactiveState);
         transform.position = defaultPos;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        UpdateState(currentAttackState);
+
+        currentState?.Update();
         
     }
 
     public void StartAttack()
     {
-        if (currentAttackState == AttackState.Inactive)
+        if (currentState == inactiveState)
         {
-            ChangeState(AttackState.Stab);
+            ChangeState(stabState);
             
         }
     }
 
-    public void ChangeState(AttackState state)
+    public void ChangeState(State state)
     {
-        ExitState(currentAttackState);
-        currentAttackState = state;
-        EnterState(currentAttackState);
+        currentState?.Exit();
+        currentState = state;
+        currentState.Enter();
     }
 
-    public void ExitState(AttackState exit)
-    {
-        switch (exit)
-        {
-            case AttackState.Inactive:
-                break;
-            case AttackState.Stab:
-                break;
-            case AttackState.Return:
-                break;
-            default:
-                break;
-        }
-    }
 
-    public void EnterState(AttackState enter)
-    {
-        switch (enter)
-        {
-            case AttackState.Inactive:
-                transform.localPosition = defaultPos;
-                theCollider.enabled = false;
-                break;
-            case AttackState.Stab:
-                theCollider.enabled = true;
-                break;
-            case AttackState.Return:
-                break;
-            default:
-                break;
-        }
-    }
 
-    public void UpdateState(AttackState update)
-    {
-        switch (update)
-        {
-            case AttackState.Inactive:
-                break;
-            case AttackState.Stab:
-                if (transform.localPosition.z > defaultPos.z + reach)
-                {
-                    ChangeState(AttackState.Return);
-                    break;
-                }
-                
-                transform.localPosition += new Vector3(0, 0, Time.deltaTime * attackSpeed);
-                break;
-                
-
-            case AttackState.Return:
-                if (transform.localPosition.z < defaultPos.z)
-                {
-                    ChangeState(AttackState.Inactive);
-                    break;
-                }
-                
-                transform.localPosition += new Vector3(0, 0, -Time.deltaTime * attackSpeed);
-                break;
-                
-                
-            default:
-                break;
-        }
-    }
+    
     private void OnTriggerEnter(Collider other)
     {
-        if ((currentAttackState == AttackState.Stab || currentAttackState == AttackState.Return) && other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag != "Enemy")
         {
-            if (other.TryGetComponent(out Health health))
-            {
-                health.TakeDamage(2);
-                Debug.Log(currentAttackState);
-            }
+            return;
         }
+
+        if (currentState != stabState && currentState != returnState)
+        {
+            return;
+        }
+        if (! (other.TryGetComponent(out Health health)))
+        {
+            return;
+
+        }
+        health.TakeDamage(2);
     }
 
 
