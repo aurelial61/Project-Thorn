@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerMovementScript : MonoBehaviour
 {
@@ -14,7 +15,9 @@ public class PlayerMovementScript : MonoBehaviour
     [Header("Stroke settings")]
     public float strokeForce;
     public float forceTimer;
-
+    [Header("Attacks")]
+    public UnityEvent spearAttack = new UnityEvent();
+    
     public GameObject harpoon;
     public HarpoonScript harpoonPrefab;
     private HarpoonScript spawnedHarpoon;
@@ -26,6 +29,7 @@ public class PlayerMovementScript : MonoBehaviour
     {
         fish = false;
         hStartPos = harpoon.GetComponent<Transform>().position;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -45,6 +49,7 @@ public class PlayerMovementScript : MonoBehaviour
             }
 
         }
+        ReadAttackInput();
     }
 
     void ReadMovementInput()
@@ -60,7 +65,7 @@ public class PlayerMovementScript : MonoBehaviour
         Vector3 finalDirection;
         if (!(moveDirection == Vector3.zero) && Vector3.Magnitude(GetComponent<Rigidbody>().velocity) < 10)
         {
-
+        
             finalDirection = Camera.main.transform.right * moveDirection.x + Camera.main.transform.forward * moveDirection.z;
 
             finalDirection.Normalize();
@@ -69,7 +74,7 @@ public class PlayerMovementScript : MonoBehaviour
 
 
         }
-
+        
 
     }
 
@@ -80,7 +85,7 @@ public class PlayerMovementScript : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 
-
+   
 
     void ReadStrokeInput()
     {
