@@ -33,5 +33,11 @@ public class Enemy1FollowState : State
         e.transform.position += (e.transform.forward * e.swimSpeed * Time.fixedDeltaTime);
         e.transform.rotation = Quaternion.Slerp(e.transform.rotation, lookAtPlayerRot, e.rotationSpeed * Time.fixedDeltaTime);
 
+        if (d.DetectPlayer(e.attackingRange))
+        {
+            e.ChangeState(e.attackingState);
+        }
+
+
     }
 }

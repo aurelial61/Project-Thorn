@@ -16,24 +16,18 @@ public class PlayerDetectionScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        DetectPlayer();
-    }
 
-    void DetectPlayer()
+    public bool DetectPlayer(float distance)
     {
         Vector3 playerToEnemyAngle = (player.position - transform.position).normalized;
-        if ((player.position - transform.position).magnitude <= range &&
+        return ((player.position - transform.position).magnitude <= distance &&
             Vector3.Angle(transform.forward, playerToEnemyAngle) < detectAngle &&
-            Physics.Raycast(transform.position, playerToEnemyAngle, out RaycastHit a, range, playerMask))
-        {
-            //Debug.Log("AH");
-            detected = true;
-        }
-        else
-        {
-            detected = false;
-        }
+            Physics.Raycast(transform.position, playerToEnemyAngle, out RaycastHit a, distance, playerMask));
     }
+
+    public void DetectPlayer()
+    {
+        DetectPlayer(range);
+    }
+
 }
