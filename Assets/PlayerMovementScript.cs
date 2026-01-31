@@ -28,7 +28,7 @@ public class PlayerMovementScript : MonoBehaviour
     void Start()
     {
         fish = false;
-        hStartPos = harpoon.GetComponent<Transform>().position;
+        //hStartPos = harpoon.GetComponent<Transform>().position;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -43,14 +43,8 @@ public class PlayerMovementScript : MonoBehaviour
         // attack
         if (!fish)
         {
-            //if (Input.GetKeyDown(KeyCode.Q))
-            //{
-                ReadAttackInput();
-                //HarpoonAttack();
-            //}
-
-        }
-        //ReadAttackInput();
+          ReadAttackInput();
+        };
     }
 
     private void FixedUpdate()

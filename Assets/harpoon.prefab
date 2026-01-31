@@ -147,4 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 2
-  damage: 0
+  player: {fileID: 0}
+  position: {x: 0, y: 0, z: 0}
+  localPos: {x: 0, y: 0, z: 0}
+  damage: 1

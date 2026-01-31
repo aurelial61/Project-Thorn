@@ -948,7 +948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 2
-  damage: 0
+  damage: 2
 --- !u!1 &9107020424261665359
 GameObject:
   m_ObjectHideFlags: 0
