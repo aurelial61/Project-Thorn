@@ -9,7 +9,7 @@
     }
     public override void Enter()
     {
-
+        e.startAttack.Invoke();
     }
 
     public override void Exit()

@@ -30,7 +30,7 @@ public class Enemy1IdleState : State
         e.transform.position += (e.transform.forward * e.idleSpeed * Time.fixedDeltaTime);
         e.transform.Rotate(e.idleRotate);
 
-        if (d.detected)
+        if (d.DetectPlayer(e.aggroRange, e.aggroAngle))
         {
             e.ChangeState(e.followState);
         }

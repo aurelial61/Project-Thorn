@@ -19,12 +19,17 @@ public class SpearStabState : State
 
     public override void Update()
     {
+        
+    }
+
+    public override void FixedUpdate()
+    {
         if (spearScript.transform.localPosition.z > spearScript.defaultPos.z + spearScript.reach)
         {
             spearScript.ChangeState(spearScript.returnState);
             return;
         }
 
-        spearScript.transform.localPosition += new Vector3(0, 0, Time.deltaTime * spearScript.attackSpeed);
+        spearScript.transform.localPosition += new Vector3(0, 0, Time.fixedDeltaTime * spearScript.attackSpeed);
     }
 }

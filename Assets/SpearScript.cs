@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SpearScript : MonoBehaviour
 {
@@ -15,19 +16,21 @@ public class SpearScript : MonoBehaviour
     public Vector3 defaultPos;
     public CapsuleCollider theCollider;
     public State currentState;
+    public UnityEvent attackEnd;
+    public string attackingTag;
 
     private void Awake()
     {
         inactiveState = new SpearInactiveState(this);
         stabState = new SpearStabState(this);
-        returnState = new SpearReturnState(this);
+        returnState = new SpearReturnState(this, attackEnd);
         
     }
     void Start()
     {
         theCollider = GetComponent<CapsuleCollider>();
         ChangeState(inactiveState);
-        transform.position = defaultPos;
+        
     }
 
     // Update is called once per frame
@@ -36,6 +39,11 @@ public class SpearScript : MonoBehaviour
 
         currentState?.Update();
         
+    }
+
+    private void FixedUpdate()
+    {
+        currentState?.FixedUpdate();
     }
 
     public void StartAttack()
@@ -59,7 +67,7 @@ public class SpearScript : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag != "Enemy")
+        if (other.gameObject.tag != attackingTag)
         {
             return;
         }
@@ -75,6 +83,5 @@ public class SpearScript : MonoBehaviour
         }
         health.TakeDamage(2);
     }
-
 
 }

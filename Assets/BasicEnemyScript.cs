@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BasicEnemyScript : MonoBehaviour
 {
@@ -18,6 +19,10 @@ public class BasicEnemyScript : MonoBehaviour
     public float chargeForce;
     public float swimSpeed;
     public float rotationSpeed;
+    public float aggroRange;
+    public float attackingRange;
+    public float attackAngle;
+    public float aggroAngle;
     public Vector3 idleRotate;
     public State currentState;
     public Enemy1IdleState idleState;
@@ -26,6 +31,8 @@ public class BasicEnemyScript : MonoBehaviour
     public Enemy1CooldownState cooldownState;
     public Enemy1AttackingState attackingState;
     public PlayerDetectionScript detect;
+
+    public UnityEvent startAttack;
 
 
     private void Awake()
@@ -64,5 +71,13 @@ public class BasicEnemyScript : MonoBehaviour
         currentState?.Exit();
         currentState = state;
         currentState.Enter();
+    }
+
+    public void EndAttack()
+    {
+        if (currentState == attackingState)
+        {
+            ChangeState(cooldownState);
+        }
     }
 }
