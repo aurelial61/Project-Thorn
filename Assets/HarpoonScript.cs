@@ -112,7 +112,7 @@ public class HarpoonScript : MonoBehaviour
         {
             if (other.TryGetComponent(out Health health))
             {
-                health.TakeDamage(2);
+                health.TakeDamage(damage);
             }
         }
     }
