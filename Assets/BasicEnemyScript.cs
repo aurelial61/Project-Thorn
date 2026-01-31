@@ -21,6 +21,8 @@ public class BasicEnemyScript : MonoBehaviour
     public float rotationSpeed;
     public float aggroRange;
     public float attackingRange;
+    public float attackAngle;
+    public float aggroAngle;
     public Vector3 idleRotate;
     public State currentState;
     public Enemy1IdleState idleState;
@@ -75,7 +77,7 @@ public class BasicEnemyScript : MonoBehaviour
     {
         if (currentState == attackingState)
         {
-            ChangeState(idleState);
+            ChangeState(cooldownState);
         }
     }
 }
