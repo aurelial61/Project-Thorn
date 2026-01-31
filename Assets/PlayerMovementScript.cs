@@ -25,6 +25,8 @@ public class PlayerMovementScript : MonoBehaviour
     public float hForce;
     public bool thrown = false;
 
+    public UnityEvent die = new UnityEvent();
+
     void Start()
     {
         fish = false;
@@ -129,5 +131,11 @@ public class PlayerMovementScript : MonoBehaviour
         {
             HarpoonAttack();
         }
+    }
+
+    public void Die()
+    {
+        die.Invoke();
+        Destroy(gameObject);
     }
 }
