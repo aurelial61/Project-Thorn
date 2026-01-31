@@ -6,6 +6,8 @@ using UnityEngine.Events;
 public class PlayerMovementScript : MonoBehaviour
 {
     // Start is called before the first frame update
+    public bool fish;
+
     [Header("General movement")]
     public Vector3 moveDirection;
     public float forceScalar;
@@ -16,8 +18,17 @@ public class PlayerMovementScript : MonoBehaviour
     [Header("Attacks")]
     public UnityEvent spearAttack = new UnityEvent();
     
+    public GameObject harpoon;
+    public HarpoonScript harpoonPrefab;
+    private HarpoonScript spawnedHarpoon;
+    public Vector3 hStartPos;
+    public float hForce;
+    public bool thrown = false;
+
     void Start()
     {
+        fish = false;
+        hStartPos = harpoon.GetComponent<Transform>().position;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -28,7 +39,18 @@ public class PlayerMovementScript : MonoBehaviour
         
         ApplyRotation();
         ReadStrokeInput();
-        ReadAttackInput();
+
+        // attack
+        if (!fish)
+        {
+            //if (Input.GetKeyDown(KeyCode.Q))
+            //{
+                ReadAttackInput();
+                //HarpoonAttack();
+            //}
+
+        }
+        //ReadAttackInput();
     }
 
     private void FixedUpdate()
@@ -47,14 +69,14 @@ public class PlayerMovementScript : MonoBehaviour
     void ApplyMovement()
     {
         Vector3 finalDirection;
-        if (! (moveDirection == Vector3.zero) && Vector3.Magnitude(GetComponent<Rigidbody>().velocity) < 10)
+        if (!(moveDirection == Vector3.zero) && Vector3.Magnitude(GetComponent<Rigidbody>().velocity) < 10)
         {
         
             finalDirection = Camera.main.transform.right * moveDirection.x + Camera.main.transform.forward * moveDirection.z;
 
             finalDirection.Normalize();
 
-            GetComponent<Rigidbody>().AddForce(forceScalar * finalDirection, ForceMode.Impulse); 
+            GetComponent<Rigidbody>().AddForce(forceScalar * finalDirection, ForceMode.Impulse);
 
 
         }
@@ -89,11 +111,29 @@ public class PlayerMovementScript : MonoBehaviour
         GetComponent<Rigidbody>().AddForce(strokeForce * Camera.main.transform.forward, ForceMode.Impulse);
     }
 
+    void HarpoonAttack()
+    {
+        if (spawnedHarpoon != null)
+        {
+            return;
+        }
+
+        spawnedHarpoon = Instantiate(harpoonPrefab, harpoon.transform.position, harpoon.transform.rotation);
+        spawnedHarpoon.Throw(harpoon, hForce, 20, Camera.main.transform.forward);
+        harpoon.gameObject.SetActive(false);
+    }
+
     void ReadAttackInput()
     {
+
         if (Input.GetMouseButtonDown(0))
         {
             spearAttack.Invoke();
+        }
+
+        else if (Input.GetMouseButtonDown(1))
+        {
+            HarpoonAttack();
         }
     }
 }
