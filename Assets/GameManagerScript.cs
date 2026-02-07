@@ -8,6 +8,8 @@ public class GameManagerScript : MonoBehaviour
     // Start is called before the first frame update
     public bool gameOver;
     public TextMeshProUGUI gameOverText;
+    public TextMeshProUGUI HPText;
+    public Health playerHealth;
     void Start()
     {
         
@@ -19,6 +21,10 @@ public class GameManagerScript : MonoBehaviour
         if (gameOver)
         {
             gameOverText.text = "GAME OVER";
+        }
+        else
+        {
+            HPText.text = "HP: " + playerHealth.currentHP + "/" + playerHealth.maxHP;
         }
     }
     public void GameOver()

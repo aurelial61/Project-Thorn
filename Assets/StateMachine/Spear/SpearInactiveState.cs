@@ -11,6 +11,7 @@ public class SpearInactiveState : State
     }
     public override void Enter()
     {
+        spearScript.enemyAttacked = new List<Transform>();
         spearScript.transform.localPosition = spearScript.defaultPos;
         spearScript.theCollider.enabled = false;
     }
