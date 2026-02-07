@@ -21,6 +21,7 @@ public class GameManagerScript : MonoBehaviour
         if (gameOver)
         {
             gameOverText.text = "GAME OVER";
+            HPText.text = "HP: 0/20";
         }
         else
         {
