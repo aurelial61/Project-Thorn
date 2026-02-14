@@ -56,18 +56,18 @@ public class BasicEnemyScript : MonoBehaviour
     void Update()
     {
         currentState.Update();
-        if (damageTimer <= 0)
+        
+        if (damageTimer >= 0)
         {
-            if (gameObject.GetComponent<MeshRenderer>().materials[0] == defaultMat)
-            {
-                gameObject.GetComponent<MeshRenderer>().materials[0] = damageMat;
-            }
+            
+            gameObject.GetComponent<MeshRenderer>().material = damageMat;
             damageTimer -= Time.deltaTime;
         }
-        else if (gameObject.GetComponent<MeshRenderer>().materials[0] == damageMat)
+        else
         {
-            gameObject.GetComponent<MeshRenderer>().materials[0] = defaultMat;
+            gameObject.GetComponent<MeshRenderer>().material = defaultMat;
         }
+        
     }
 
     private void FixedUpdate()
@@ -94,7 +94,7 @@ public class BasicEnemyScript : MonoBehaviour
         {
             ChangeState(followState);
         }
-        damageTimer = 0.5f;
+        damageTimer = 0.1f;
         //Debug.Log("a");
     }
 
