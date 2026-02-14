@@ -18,6 +18,7 @@ public class PlayerMovementScript : MonoBehaviour
     [Header("Attacks")]
     public UnityEvent spearAttack = new UnityEvent();
     
+    [Header("Harpoon")]
     public GameObject harpoon;
     public HarpoonScript harpoonPrefab;
     private HarpoonScript spawnedHarpoon;
@@ -27,6 +28,10 @@ public class PlayerMovementScript : MonoBehaviour
     public bool thrown = false;
     public Transform target;
     public float harpoonSpeed;
+    [Header("Damage")]
+    public float damageTimer;
+    public Material damageMat;
+    public Material defaultMat;
 
     public UnityEvent die = new UnityEvent();
 
@@ -35,7 +40,9 @@ public class PlayerMovementScript : MonoBehaviour
         fish = false;
         //hStartPos = harpoon.GetComponent<Transform>().position;
         Cursor.lockState = CursorLockMode.Locked;
+
         
+
     }
 
     // Update is called once per frame
@@ -51,6 +58,16 @@ public class PlayerMovementScript : MonoBehaviour
         {
           ReadAttackInput();
         };
+        if (damageTimer > 0)
+        {
+
+            gameObject.GetComponent<MeshRenderer>().material = damageMat;
+            damageTimer -= Time.deltaTime;
+        }
+        else
+        {
+            gameObject.GetComponent<MeshRenderer>().material = defaultMat;
+        }
     }
 
     private void FixedUpdate()
@@ -124,7 +141,12 @@ public class PlayerMovementScript : MonoBehaviour
 
         GetComponent<Rigidbody>().AddForce(strokeForce * finalDirection, ForceMode.Impulse);
     }
-
+    public void onDamageTaken()
+    {
+        
+        damageTimer = 0.1f;
+        //Debug.Log("a");
+    }
     void HarpoonAttack()
     {
         if (spawnedHarpoon != null)

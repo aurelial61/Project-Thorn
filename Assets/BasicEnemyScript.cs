@@ -57,7 +57,7 @@ public class BasicEnemyScript : MonoBehaviour
     {
         currentState.Update();
         
-        if (damageTimer >= 0)
+        if (damageTimer > 0)
         {
             
             gameObject.GetComponent<MeshRenderer>().material = damageMat;
