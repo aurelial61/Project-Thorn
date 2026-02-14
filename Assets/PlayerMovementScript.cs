@@ -22,8 +22,11 @@ public class PlayerMovementScript : MonoBehaviour
     public HarpoonScript harpoonPrefab;
     private HarpoonScript spawnedHarpoon;
     public Vector3 hStartPos;
+    public float harpoonOffset;
     public float hForce;
     public bool thrown = false;
+    public Transform target;
+    public float harpoonSpeed;
 
     public UnityEvent die = new UnityEvent();
 
@@ -32,6 +35,7 @@ public class PlayerMovementScript : MonoBehaviour
         fish = false;
         //hStartPos = harpoon.GetComponent<Transform>().position;
         Cursor.lockState = CursorLockMode.Locked;
+        
     }
 
     // Update is called once per frame
@@ -104,7 +108,21 @@ public class PlayerMovementScript : MonoBehaviour
 
     void ApplyStroke()
     {
-        GetComponent<Rigidbody>().AddForce(strokeForce * Camera.main.transform.forward, ForceMode.Impulse);
+        Vector3 finalDirection = Camera.main.transform.forward;
+        if (!(moveDirection == Vector3.zero))
+        {
+
+            finalDirection = Camera.main.transform.right * moveDirection.x + Camera.main.transform.forward * moveDirection.z;
+
+            finalDirection.Normalize();
+
+            
+
+
+        }
+
+
+        GetComponent<Rigidbody>().AddForce(strokeForce * finalDirection, ForceMode.Impulse);
     }
 
     void HarpoonAttack()
@@ -115,7 +133,7 @@ public class PlayerMovementScript : MonoBehaviour
         }
 
         spawnedHarpoon = Instantiate(harpoonPrefab, harpoon.transform.position, harpoon.transform.rotation);
-        spawnedHarpoon.Throw(harpoon, hForce, 20, Camera.main.transform.forward);
+        spawnedHarpoon.Throw(harpoon, hForce, target, harpoonSpeed);
         harpoon.gameObject.SetActive(false);
     }
 

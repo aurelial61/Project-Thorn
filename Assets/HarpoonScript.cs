@@ -19,7 +19,9 @@ public class HarpoonScript : MonoBehaviour
     public Transform player;
     public Vector3 position;
     public Vector3 localPos;
-
+    public Transform target;
+    public float speed;
+    
     public int damage;
     public enum State
     {
@@ -35,12 +37,23 @@ public class HarpoonScript : MonoBehaviour
         localPos = transform.localPosition;
     }
 
-    public void Throw(GameObject original, float force, float distance, Vector3 direction)
+    /*
+     * public void Throw(GameObject original, float force, float distance, Vector3 direction)
     {
         originalHarpoon = original;
         rb.AddForce(force * direction.normalized, ForceMode.Impulse);
         maxDistance = distance;
         startPos = original.transform.position;
+        ChangeState(State.Going);
+    }
+    */
+
+    public void Throw(GameObject original, float force, Transform target, float speed)
+    {
+        originalHarpoon = original;
+        startPos = original.transform.position;
+        this.speed = speed;
+        this.target = target;
         ChangeState(State.Going);
     }
 
@@ -51,7 +64,8 @@ public class HarpoonScript : MonoBehaviour
         {
             case State.Going:
                 Timer += Time.deltaTime;
-                if (Vector3.Distance(startPos, transform.position) >= maxDistance || Timer >= 5)
+                transform.position = Vector3.MoveTowards(transform.position, target.position, Time.deltaTime * speed);
+                if (Vector3.Distance(transform.position, target.transform.position) <= 0.5f || Timer >= 5)
                 {
                     ChangeState(State.Returning);
                 }

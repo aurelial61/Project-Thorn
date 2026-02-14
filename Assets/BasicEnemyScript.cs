@@ -16,6 +16,9 @@ public class BasicEnemyScript : MonoBehaviour
         Attacking
     }
     public float idleSpeed;
+    public float damageTimer;
+    public Material damageMat;
+    public Material defaultMat;
     public float chargeForce;
     public float swimSpeed;
     public float rotationSpeed;
@@ -53,6 +56,18 @@ public class BasicEnemyScript : MonoBehaviour
     void Update()
     {
         currentState.Update();
+        if (damageTimer <= 0)
+        {
+            if (gameObject.GetComponent<MeshRenderer>().materials[0] == defaultMat)
+            {
+                gameObject.GetComponent<MeshRenderer>().materials[0] = damageMat;
+            }
+            damageTimer -= Time.deltaTime;
+        }
+        else if (gameObject.GetComponent<MeshRenderer>().materials[0] == damageMat)
+        {
+            gameObject.GetComponent<MeshRenderer>().materials[0] = defaultMat;
+        }
     }
 
     private void FixedUpdate()
@@ -71,6 +86,16 @@ public class BasicEnemyScript : MonoBehaviour
         currentState?.Exit();
         currentState = state;
         currentState.Enter();
+    }
+
+    public void onDamageTaken()
+    {
+        if (currentState == idleState)
+        {
+            ChangeState(followState);
+        }
+        damageTimer = 0.5f;
+        //Debug.Log("a");
     }
 
     public void EndAttack()

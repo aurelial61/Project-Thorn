@@ -294,6 +294,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idleSpeed: 2
+  damageTimer: 0
+  damageMat: {fileID: 2100000, guid: 1b5b0b50df4c9aa4aaa9b5e24546e4b8, type: 2}
+  defaultMat: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   chargeForce: 0
   swimSpeed: 5
   rotationSpeed: 10
@@ -349,7 +352,19 @@ MonoBehaviour:
         m_CallState: 2
   onDamageTaken:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3643769621360058876}
+        m_TargetAssemblyTypeName: BasicEnemyScript, Assembly-CSharp
+        m_MethodName: onDamageTaken
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onHeal:
     m_PersistentCalls:
       m_Calls: []
