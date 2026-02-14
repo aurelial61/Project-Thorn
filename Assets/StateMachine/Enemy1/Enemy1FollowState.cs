@@ -28,6 +28,10 @@ public class Enemy1FollowState : State
 
     public override void FixedUpdate()
     {
+        if (d.player == null)
+        {
+            return;
+        }
         Vector3 dirToPlayer = (d.player.transform.position - e.transform.position).normalized;
         Quaternion lookAtPlayerRot = Quaternion.LookRotation(dirToPlayer);
         e.transform.position += (e.transform.forward * e.swimSpeed * Time.fixedDeltaTime);

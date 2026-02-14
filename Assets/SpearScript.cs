@@ -17,6 +17,7 @@ public class SpearScript : MonoBehaviour
     public CapsuleCollider theCollider;
     public State currentState;
     public UnityEvent attackEnd;
+    public List<Transform> enemyAttacked;
     public string attackingTag;
 
     private void Awake()
@@ -24,6 +25,7 @@ public class SpearScript : MonoBehaviour
         inactiveState = new SpearInactiveState(this);
         stabState = new SpearStabState(this);
         returnState = new SpearReturnState(this, attackEnd);
+        enemyAttacked = new List<Transform>();
         
     }
     void Start()
@@ -81,7 +83,12 @@ public class SpearScript : MonoBehaviour
             return;
 
         }
-        health.TakeDamage(2);
+        if (enemyAttacked.Contains(other.transform))
+        {
+            return;
+        }
+        health.TakeDamage(damage);
+        enemyAttacked.Add(other.transform);
     }
 
 }

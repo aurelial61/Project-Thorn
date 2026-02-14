@@ -19,6 +19,10 @@ public class PlayerDetectionScript : MonoBehaviour
 
     public bool DetectPlayer(float distance, float angle)
     {
+        if (player == null)
+        {
+            return false;
+        }
         Vector3 playerToEnemyAngle = (player.position - transform.position).normalized;
         return ((player.position - transform.position).magnitude <= distance &&
             Vector3.Angle(transform.forward, playerToEnemyAngle) < angle &&

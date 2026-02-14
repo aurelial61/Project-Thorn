@@ -7,6 +7,7 @@ using UnityEngine;
 public class HarpoonScript : MonoBehaviour
 {
     private GameObject originalHarpoon;
+    //public GameObject player;
 
     private float maxDistance;
 
@@ -15,6 +16,9 @@ public class HarpoonScript : MonoBehaviour
     public State currentState = State.Idling;
 
     private float Timer;
+    public Transform player;
+    public Vector3 position;
+    public Vector3 localPos;
 
     public int damage;
     public enum State
@@ -28,6 +32,7 @@ public class HarpoonScript : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        localPos = transform.localPosition;
     }
 
     public void Throw(GameObject original, float force, float distance, Vector3 direction)
@@ -35,7 +40,7 @@ public class HarpoonScript : MonoBehaviour
         originalHarpoon = original;
         rb.AddForce(force * direction.normalized, ForceMode.Impulse);
         maxDistance = distance;
-        startPos = transform.position;
+        startPos = original.transform.position;
         ChangeState(State.Going);
     }
 
@@ -53,7 +58,7 @@ public class HarpoonScript : MonoBehaviour
                 break;
             case State.Returning:
                 transform.rotation = Quaternion.Slerp(transform.rotation, originalHarpoon.transform.rotation, Time.deltaTime * 200);
-                transform.position = Vector3.Lerp(transform.position, originalHarpoon.transform.position, Time.deltaTime * 10);
+                transform.position = Vector3.Lerp(transform.position, originalHarpoon.transform.position, Time.deltaTime * 25);
                 if (Vector3.Distance(transform.position, originalHarpoon.transform.position) <= 2)
                 {
                     Vector3 direction = originalHarpoon.transform.position - transform.position;
@@ -69,11 +74,13 @@ public class HarpoonScript : MonoBehaviour
                 }
                 break;
             case State.Idling:
-
+                transform.localPosition = localPos;
                 break;
             default:
                 break;
         }
+
+        
 
     }
 
