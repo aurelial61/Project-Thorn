@@ -28,10 +28,13 @@ public class PlayerMovementScript : MonoBehaviour
     public bool thrown = false;
     public Transform target;
     public float harpoonSpeed;
+    public string damageTag;
+    public UnityEvent harpoonEnd;
     [Header("Damage")]
     public float damageTimer;
     public Material damageMat;
     public Material defaultMat;
+    
 
     public UnityEvent die = new UnityEvent();
 
@@ -155,7 +158,7 @@ public class PlayerMovementScript : MonoBehaviour
         }
 
         spawnedHarpoon = Instantiate(harpoonPrefab, harpoon.transform.position, harpoon.transform.rotation);
-        spawnedHarpoon.Throw(harpoon, hForce, target, harpoonSpeed);
+        spawnedHarpoon.Throw(harpoon, hForce, target, harpoonSpeed, damageTag, 1, harpoonEnd);
         harpoon.gameObject.SetActive(false);
     }
 

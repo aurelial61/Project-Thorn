@@ -34,6 +34,20 @@ public class BasicEnemyScript : MonoBehaviour
     public Enemy1CooldownState cooldownState;
     public Enemy1AttackingState attackingState;
     public PlayerDetectionScript detect;
+    public Enemy1RangedState rangedState;
+    public Enemy1PreparingState preparingState;
+
+    [Header("Harpoon")]
+    public GameObject harpoon;
+    public HarpoonScript harpoonPrefab;
+    private HarpoonScript spawnedHarpoon;
+    public Vector3 hStartPos;
+    public float harpoonOffset;
+    public float hForce;
+    public bool thrown = false;
+    public Transform target;
+    public float harpoonSpeed;
+    public UnityEvent harpoonEnd;
 
     public UnityEvent startAttack;
 
@@ -45,6 +59,8 @@ public class BasicEnemyScript : MonoBehaviour
        chargingState = new Enemy1ChargingState(this, detect);
        cooldownState = new Enemy1CooldownState(this, detect);
        attackingState = new Enemy1AttackingState(this, detect);
+        rangedState = new Enemy1RangedState(this, detect);
+        preparingState = new Enemy1PreparingState(this, detect);
     }
 
     void Start()
@@ -100,9 +116,21 @@ public class BasicEnemyScript : MonoBehaviour
 
     public void EndAttack()
     {
-        if (currentState == attackingState)
-        {
-            ChangeState(cooldownState);
-        }
+        
+           ChangeState(cooldownState);
+        
     }
+    public void HarpoonAttack()
+    {
+        if (spawnedHarpoon != null)
+        {
+            return;
+        }
+
+        spawnedHarpoon = Instantiate(harpoonPrefab, harpoon.transform.position, harpoon.transform.rotation);
+        spawnedHarpoon.Throw(harpoon, hForce, target, harpoonSpeed, "Player", 1, harpoonEnd);
+        harpoon.gameObject.SetActive(false);
+    }
+
+   
 }

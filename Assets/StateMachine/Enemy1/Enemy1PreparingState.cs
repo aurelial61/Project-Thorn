@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
-public class Enemy1ChargingState : State
+public class Enemy1PreparingState : State
 {
     BasicEnemyScript e;
     PlayerDetectionScript d;
     float timer;
     float length;
-    public Enemy1ChargingState(BasicEnemyScript enemy, PlayerDetectionScript detect)
+    public Enemy1PreparingState(BasicEnemyScript enemy, PlayerDetectionScript detect)
     {
         e = enemy;
         d = detect;
@@ -13,7 +13,7 @@ public class Enemy1ChargingState : State
     public override void Enter()
     {
         timer = 0;
-        length = 0.4f;
+        length = 0.3f;
     }
 
     public override void Exit()
@@ -26,7 +26,7 @@ public class Enemy1ChargingState : State
         timer += Time.deltaTime;
         if (timer >= length)
         {
-            e.ChangeState(e.rangedState);
+            e.ChangeState(e.attackingState);
         }
 
     }
