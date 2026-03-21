@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 2335551862998468464}
   - component: {fileID: 8159390922360912533}
   - component: {fileID: 3079247810004914353}
+  - component: {fileID: 929386181129831116}
   m_Layer: 0
   m_Name: boomfish
   m_TagString: Untagged
@@ -136,7 +137,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 2, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3079247810004914353
 MonoBehaviour:
@@ -151,9 +152,59 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  speed: 2
+  speed: 5
   rangedetect: 15
-  rangeboom: 3
+  rangeboom: 2
   orbit: {fileID: 1877155868039994057}
+  explosion: {fileID: 1577389394672208102, guid: 7120dcbceecc7574081723f0992af10f, type: 3}
   rotationspeed: 90
   rotationaxis: {x: 0, y: 1, z: 0}
+  damageMat: {fileID: 0}
+  defaultMat: {fileID: 0}
+--- !u!114 &929386181129831116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5464421694144603515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de156870457cc984b89222e03bc7f81f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 2
+  currentHP: 0
+  onDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3079247810004914353}
+        m_TargetAssemblyTypeName: boomfish, Assembly-CSharp
+        m_MethodName: explode
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDamageTaken:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3079247810004914353}
+        m_TargetAssemblyTypeName: boomfish, Assembly-CSharp
+        m_MethodName: damage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onHeal:
+    m_PersistentCalls:
+      m_Calls: []

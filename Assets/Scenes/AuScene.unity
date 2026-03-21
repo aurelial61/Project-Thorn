@@ -1042,6 +1042,57 @@ MonoBehaviour:
   onHeal:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &692313495 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5464421694144603515, guid: 0a1c87f92937c8548b5f5dec9a08406e, type: 3}
+  m_PrefabInstance: {fileID: 2143725913}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &692313496 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3079247810004914353, guid: 0a1c87f92937c8548b5f5dec9a08406e, type: 3}
+  m_PrefabInstance: {fileID: 2143725913}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692313495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 065c7b3ebe459e94480c58832052ca46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &692313501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692313495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de156870457cc984b89222e03bc7f81f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 2
+  currentHP: 0
+  onDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 692313496}
+        m_TargetAssemblyTypeName: boomfish, Assembly-CSharp
+        m_MethodName: explode
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDamageTaken:
+    m_PersistentCalls:
+      m_Calls: []
+  onHeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1919,6 +1970,94 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19439db2ce3ab2a44af49db779d1c153, type: 3}
+--- !u!1001 &2143725913
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3079247810004914353, guid: 0a1c87f92937c8548b5f5dec9a08406e, type: 3}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3079247810004914353, guid: 0a1c87f92937c8548b5f5dec9a08406e, type: 3}
+      propertyPath: damageMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 1b5b0b50df4c9aa4aaa9b5e24546e4b8, type: 2}
+    - target: {fileID: 3079247810004914353, guid: 0a1c87f92937c8548b5f5dec9a08406e, type: 3}
+      propertyPath: explosion
+      value: 
+      objectReference: {fileID: 1577389394672208102, guid: 7120dcbceecc7574081723f0992af10f, type: 3}
+    - target: {fileID: 3079247810004914353, guid: 0a1c87f92937c8548b5f5dec9a08406e, type: 3}
+      propertyPath: defaultMat
+      value: 
+      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 4710049663185755194, guid: 0a1c87f92937c8548b5f5dec9a08406e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710049663185755194, guid: 0a1c87f92937c8548b5f5dec9a08406e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710049663185755194, guid: 0a1c87f92937c8548b5f5dec9a08406e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710049663185755194, guid: 0a1c87f92937c8548b5f5dec9a08406e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710049663185755194, guid: 0a1c87f92937c8548b5f5dec9a08406e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710049663185755194, guid: 0a1c87f92937c8548b5f5dec9a08406e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710049663185755194, guid: 0a1c87f92937c8548b5f5dec9a08406e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710049663185755194, guid: 0a1c87f92937c8548b5f5dec9a08406e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710049663185755194, guid: 0a1c87f92937c8548b5f5dec9a08406e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710049663185755194, guid: 0a1c87f92937c8548b5f5dec9a08406e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5464421694144603515, guid: 0a1c87f92937c8548b5f5dec9a08406e, type: 3}
+      propertyPath: m_Name
+      value: boomfish
+      objectReference: {fileID: 0}
+    - target: {fileID: 5464421694144603515, guid: 0a1c87f92937c8548b5f5dec9a08406e, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8159390922360912533, guid: 0a1c87f92937c8548b5f5dec9a08406e, type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8159390922360912533, guid: 0a1c87f92937c8548b5f5dec9a08406e, type: 3}
+      propertyPath: m_Size.y
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5464421694144603515, guid: 0a1c87f92937c8548b5f5dec9a08406e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 692313501}
+  m_SourcePrefab: {fileID: 100100000, guid: 0a1c87f92937c8548b5f5dec9a08406e, type: 3}
 --- !u!54 &2781939705931693647
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2163,3 +2302,4 @@ SceneRoots:
   - {fileID: 308250782}
   - {fileID: 1137217844}
   - {fileID: 1608328538}
+  - {fileID: 2143725913}

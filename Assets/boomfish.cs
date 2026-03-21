@@ -8,13 +8,17 @@ public class boomfish : MonoBehaviour
     public float speed;
     public float rangedetect; //change range values to liking
     public float rangeboom;
-    public Transform orbit; 
+    public Transform orbit;
+    public GameObject explosion;
     public float rotationspeed = 90f; //degrees per second (speed) of rotation
     public Vector3 rotationaxis = Vector3.up; //the axis to rotate around
+    private float damageTimer;
+    public Material damageMat;
+    public Material defaultMat;
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.Find("Player").transform;
     }
 
     // Update is called once per frame
@@ -30,15 +34,43 @@ public class boomfish : MonoBehaviour
             
         }
         if (Vector3.Distance(transform.position, player.position) < rangeboom) 
-        { 
-            Destroy(gameObject);//here it kills itselfs
-            //add a damagin line here if you want player to take damage when he gets hit by the player
-            //also if you want add an animation somwhere here of fish going boom
+        {
+            explode();
         }
         if (orbit != null) //basically means that if orbit exist, go and do the code below (at least i think)
         {
             //rotate around the orbit
             transform.RotateAround(orbit.position, rotationaxis, rotationspeed * Time.deltaTime);
         }
+
+        if(damageTimer > 0)
+        {
+
+            gameObject.GetComponent<MeshRenderer>().material = damageMat;
+            damageTimer -= Time.deltaTime;
+        }
+        else
+        {
+            gameObject.GetComponent<MeshRenderer>().material = defaultMat;
+        }
+
     } 
+
+    public void explode()
+    {
+        if (Vector3.Distance(transform.position, player.position) < rangeboom)
+        {
+            player.gameObject.GetComponent<Health>().currentHP -= 4;
+        }
+        Instantiate(explosion, transform.position, Quaternion.identity);
+        Destroy(gameObject);//here it kills itselfs
+                            //add a damagin line here if you want player to take damage 
+                            //also if you want add an animation somwhere here of fish going boom
+    }
+
+    public void damage()
+    {
+        
+        damageTimer = 0.1f;
+    }
 }
