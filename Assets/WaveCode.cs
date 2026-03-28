@@ -13,16 +13,11 @@ public class WaveCode : MonoBehaviour
     public Vector3 spawn5;
     public Vector3 spawn6;
     public int number;
-
+    public List<GameObject> enemieslist = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
-        picker(spawn1);
-        picker(spawn2);
-        picker(spawn3);
-        picker(spawn4);
-        picker(spawn5);
-        picker(spawn6);
+        spawnwave();
     }
 
     // Update is called once per frame
@@ -33,13 +28,38 @@ public class WaveCode : MonoBehaviour
     private void picker(Vector3 spawnpoint)
     {
         number = Random.Range(1, 3);
+        GameObject spawnedenemy;
         if (number == 1)
         {
-            Instantiate(enemy1, spawnpoint, Quaternion.identity);
+            spawnedenemy = Instantiate(enemy1, spawnpoint, Quaternion.identity);
+            
         }
         else
         {
-            Instantiate(enemy2, spawnpoint, Quaternion.identity);
+            spawnedenemy = Instantiate(enemy2, spawnpoint, Quaternion.identity);
         }
+        enemieslist.Add(spawnedenemy);
+        Health spawnedenemyhealth = spawnedenemy.GetComponent<Health>();
+        spawnedenemyhealth.onDeath.AddListener(() =>
+        {
+            onenemydeath(spawnedenemy);
+        });
+    }
+    private void onenemydeath(GameObject enemy)
+    {
+        enemieslist.Remove(enemy);
+        if (enemieslist.Count == 0)
+        {
+            spawnwave();
+        }
+    }
+    private void spawnwave()
+    {
+        picker(spawn1);
+        picker(spawn2);
+        picker(spawn3);
+        picker(spawn4);
+        picker(spawn5);
+        picker(spawn6);
     }
 }

@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 2335551862998468464}
   - component: {fileID: 8159390922360912533}
   - component: {fileID: 3079247810004914353}
+  - component: {fileID: -7332675382679859587}
   m_Layer: 0
   m_Name: boomfish
   m_TagString: Untagged
@@ -150,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 065c7b3ebe459e94480c58832052ca46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  me: {fileID: 5464421694144603515}
   player: {fileID: 0}
   speed: 2
   rangedetect: 15
@@ -157,3 +159,38 @@ MonoBehaviour:
   orbit: {fileID: 1877155868039994057}
   rotationspeed: 90
   rotationaxis: {x: 0, y: 1, z: 0}
+--- !u!114 &-7332675382679859587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5464421694144603515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de156870457cc984b89222e03bc7f81f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 20
+  currentHP: 10
+  onDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3643769621360058876, guid: 19439db2ce3ab2a44af49db779d1c153, type: 3}
+        m_TargetAssemblyTypeName: BasicEnemyScript, Assembly-CSharp
+        m_MethodName: OnDeath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDamageTaken:
+    m_PersistentCalls:
+      m_Calls: []
+  onHeal:
+    m_PersistentCalls:
+      m_Calls: []

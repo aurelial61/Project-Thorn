@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class boomfish : MonoBehaviour
 {
+    public GameObject me;
     public Transform player;
     public float speed;
     public float rangedetect; //change range values to liking
@@ -30,10 +31,9 @@ public class boomfish : MonoBehaviour
             
         }
         if (Vector3.Distance(transform.position, player.position) < rangeboom) 
-        { 
-            Destroy(gameObject);//here it kills itselfs
-            //add a damagin line here if you want player to take damage when he gets hit by the player
-            //also if you want add an animation somwhere here of fish going boom
+        {
+            me.GetComponent<Health>().TakeDamage(1000000);
+            DestroyImmediate(gameObject, true);
         }
         if (orbit != null) //basically means that if orbit exist, go and do the code below (at least i think)
         {

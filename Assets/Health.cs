@@ -14,6 +14,14 @@ public class Health : MonoBehaviour
     {
         HealToMax();
     }
+
+    private void OnDestroy()
+    {
+        onDeath.RemoveAllListeners();
+        onDamageTaken.RemoveAllListeners();
+        onHeal.RemoveAllListeners();
+    }
+
     public void TakeDamage(int damage)
     {
         currentHP -= damage;
