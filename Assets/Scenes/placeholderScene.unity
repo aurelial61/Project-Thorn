@@ -837,6 +837,7 @@ MonoBehaviour:
   strokeStamina: 2
   spearStamina: 1
   harpoonStamina: 3
+  tired: 0
   strokeForce: 20
   forceTimer: 0
   spearAttack:
@@ -869,6 +870,7 @@ MonoBehaviour:
   damageTimer: 0
   damageMat: {fileID: 2100000, guid: 1b5b0b50df4c9aa4aaa9b5e24546e4b8, type: 2}
   defaultMat: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  tiredMat: {fileID: 2100000, guid: 855251c2d0120474592693346f2f4126, type: 2}
   die:
     m_PersistentCalls:
       m_Calls:
