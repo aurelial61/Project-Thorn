@@ -12,6 +12,13 @@ public class PlayerMovementScript : MonoBehaviour
     public Vector3 moveDirection;
     public float forceScalar;
     public float rotationSpeed;
+    public static int stamina;
+    public static int maxStamina = 20;
+    public float staminaRegenTime = 1.5f;
+    public float staminaTimer;
+    public int strokeStamina = 2;
+    public int spearStamina = 1;
+    public int harpoonStamina = 3;
     [Header("Stroke settings")]
     public float strokeForce;
     public float forceTimer;
@@ -44,6 +51,7 @@ public class PlayerMovementScript : MonoBehaviour
         //hStartPos = harpoon.GetComponent<Transform>().position;
         Cursor.lockState = CursorLockMode.Locked;
 
+        stamina = maxStamina;
         
 
     }
@@ -70,6 +78,17 @@ public class PlayerMovementScript : MonoBehaviour
         else
         {
             gameObject.GetComponent<MeshRenderer>().material = defaultMat;
+        }
+
+        if (stamina < maxStamina)
+        {
+            staminaTimer += Time.deltaTime;
+
+            if (staminaTimer >= staminaRegenTime)
+            {
+                stamina += 1;
+                staminaTimer = 0;
+            }
         }
     }
 
@@ -114,11 +133,13 @@ public class PlayerMovementScript : MonoBehaviour
    
 
     void ReadStrokeInput()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && forceTimer <= 0)
+    {       
+       
+        if (Input.GetKeyDown(KeyCode.LeftShift) && forceTimer <= 0 && stamina >= strokeStamina)
         {
             ApplyStroke();
             forceTimer = 0.5f;
+            stamina -= strokeStamina;
         }
         else if (forceTimer > 0)
         {
@@ -165,14 +186,16 @@ public class PlayerMovementScript : MonoBehaviour
     void ReadAttackInput()
     {
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && stamina >= spearStamina)
         {
             spearAttack.Invoke();
-        }
+            stamina -= spearStamina;
 
-        else if (Input.GetMouseButtonDown(1))
+        }
+        else if (Input.GetMouseButtonDown(1) && stamina >= harpoonStamina)
         {
             HarpoonAttack();
+            stamina -= harpoonStamina;
         }
     }
 

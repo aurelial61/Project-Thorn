@@ -25,7 +25,8 @@ public class GameManagerScript : MonoBehaviour
         }
         else
         {
-            HPText.text = "HP: " + playerHealth.currentHP + "/" + playerHealth.maxHP;
+            HPText.text = "HP: " + playerHealth.currentHP + "/" + playerHealth.maxHP + '\n' +
+                          "Stamina: " + PlayerMovementScript.stamina + "/" + PlayerMovementScript.maxStamina;
         }
     }
     public void GameOver()
