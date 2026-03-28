@@ -834,7 +834,7 @@ MonoBehaviour:
   rotationSpeed: 5
   staminaRegenTime: 0.8
   staminaTimer: 0
-  strokeStamina: 1
+  strokeStamina: 2
   spearStamina: 1
   harpoonStamina: 3
   strokeForce: 20

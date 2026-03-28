@@ -19,6 +19,7 @@ public class PlayerMovementScript : MonoBehaviour
     public int strokeStamina = 2;
     public int spearStamina = 1;
     public int harpoonStamina = 3;
+    public bool tired;
     [Header("Stroke settings")]
     public float strokeForce;
     public float forceTimer;
@@ -41,6 +42,7 @@ public class PlayerMovementScript : MonoBehaviour
     public float damageTimer;
     public Material damageMat;
     public Material defaultMat;
+    public Material tiredMat;
     
 
     public UnityEvent die = new UnityEvent();
@@ -52,8 +54,8 @@ public class PlayerMovementScript : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         stamina = maxStamina;
-        
 
+        tired = false;
     }
 
     // Update is called once per frame
@@ -75,6 +77,10 @@ public class PlayerMovementScript : MonoBehaviour
             gameObject.GetComponent<MeshRenderer>().material = damageMat;
             damageTimer -= Time.deltaTime;
         }
+        else if (tired)
+        {
+            gameObject.GetComponent<MeshRenderer>().material = tiredMat;
+        }
         else
         {
             gameObject.GetComponent<MeshRenderer>().material = defaultMat;
@@ -89,6 +95,24 @@ public class PlayerMovementScript : MonoBehaviour
                 stamina += 1;
                 staminaTimer = 0;
             }
+        }
+
+        if (stamina == 0)
+        {
+            tired = true;
+        }
+        else if (stamina >= 5)
+        {
+            tired = false;
+        }
+
+        if(tired)
+        {
+            forceScalar = 0.05f;
+        }
+        else
+        {
+            forceScalar = 0.3f;
         }
     }
 
@@ -135,7 +159,7 @@ public class PlayerMovementScript : MonoBehaviour
     void ReadStrokeInput()
     {       
        
-        if (Input.GetKeyDown(KeyCode.LeftShift) && forceTimer <= 0 && stamina >= strokeStamina)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && forceTimer <= 0 && stamina >= strokeStamina && ! tired)
         {
             ApplyStroke();
             forceTimer = 0.5f;
@@ -186,13 +210,13 @@ public class PlayerMovementScript : MonoBehaviour
     void ReadAttackInput()
     {
 
-        if (Input.GetMouseButtonDown(0) && stamina >= spearStamina)
+        if (Input.GetMouseButtonDown(0) && stamina >= spearStamina && ! tired)
         {
             spearAttack.Invoke();
             stamina -= spearStamina;
 
         }
-        else if (Input.GetMouseButtonDown(1) && stamina >= harpoonStamina)
+        else if (Input.GetMouseButtonDown(1) && stamina >= harpoonStamina && ! tired)
         {
             HarpoonAttack();
             stamina -= harpoonStamina;
