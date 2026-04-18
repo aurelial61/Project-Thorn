@@ -68,6 +68,7 @@ public class HarpoonScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         switch (currentState)
         {
             case State.Going:

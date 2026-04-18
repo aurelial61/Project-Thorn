@@ -339,6 +339,7 @@ MonoBehaviour:
   aggroAngle: 30
   idleRotate: {x: 0, y: 1, z: 0}
   detect: {fileID: 6070578485574223042}
+  HPRestore: {fileID: 460565439738925718, guid: 3201753d580b03f498e7437088a1ebda, type: 3}
   harpoon: {fileID: 652115232872624172}
   harpoonPrefab: {fileID: 830135219803729308}
   hStartPos: {x: 0, y: 0, z: 0}

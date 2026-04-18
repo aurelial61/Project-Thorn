@@ -36,6 +36,7 @@ public class BasicEnemyScript : MonoBehaviour
     public PlayerDetectionScript detect;
     public Enemy1RangedState rangedState;
     public Enemy1PreparingState preparingState;
+    public GameObject HPRestore;
 
     [Header("Harpoon")]
     public GameObject harpoon;
@@ -94,6 +95,10 @@ public class BasicEnemyScript : MonoBehaviour
 
     public void OnDeath()
     {
+        if (Random.value > 0.7)
+        {
+            Instantiate(HPRestore, transform.position, Quaternion.identity);
+        }
         Destroy(gameObject);
     }
 
