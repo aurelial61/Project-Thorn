@@ -37,6 +37,7 @@ public class BasicEnemyScript : MonoBehaviour
     public Enemy1RangedState rangedState;
     public Enemy1PreparingState preparingState;
     public GameObject HPRestore;
+    public GameManagerScript gm;
 
     [Header("Harpoon")]
     public GameObject harpoon;
@@ -99,6 +100,7 @@ public class BasicEnemyScript : MonoBehaviour
         {
             Instantiate(HPRestore, transform.position, Quaternion.identity);
         }
+        gm.EnemyDeath();
         Destroy(gameObject);
     }
 

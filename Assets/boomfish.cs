@@ -13,6 +13,7 @@ public class boomfish : MonoBehaviour
     public float rotationspeed = 90f; //degrees per second (speed) of rotation
     public Vector3 rotationaxis = Vector3.up; //the axis to rotate around
     private float damageTimer;
+    public GameManagerScript gm;
     public Material damageMat;
     public Material defaultMat;
     // Start is called before the first frame update

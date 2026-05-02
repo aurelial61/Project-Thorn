@@ -13,6 +13,7 @@ public class PlayerDetectionScript : MonoBehaviour
     void Start()
     {
         detected = false;
+        player = GameObject.Find("Player").transform;
     }
 
     // Update is called once per frame
