@@ -33,7 +33,7 @@ public class GameManagerScript : MonoBehaviour
             GameObject spawningEnemy;
             if (Random.value > 0.75f)
             {
-                spawningEnemy = Instantiate(fishPrefab, player.transform.position + dir.normalized * 5 + dir * 5, Quaternion.identity);
+                spawningEnemy = Instantiate(fishPrefab, player.transform.position + dir.normalized * 10 + dir * 5, Quaternion.identity);
                 spawningEnemy.GetComponent<boomfish>().gm = this;
             }
             else
@@ -65,5 +65,10 @@ public class GameManagerScript : MonoBehaviour
     {
         spawnDivisor += 0.1f;
         numEnemies--;
+        if (numEnemies == 0)
+        {
+            spawnTimer = (originalSpawnValue / spawnDivisor);
+        }
     }
+
 }
