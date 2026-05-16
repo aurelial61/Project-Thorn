@@ -38,21 +38,22 @@ public class WaveCode : MonoBehaviour
         {
             spawnedenemy = Instantiate(enemy2, spawnpoint, Quaternion.identity);
         }
-        //enemieslist.Add(spawnedenemy);
+        enemieslist.Add(spawnedenemy);
         Health spawnedenemyhealth = spawnedenemy.GetComponent<Health>();
-        //spawnedenemyhealth.onDeath.AddListener(() =>
-        //{
-          //  onenemydeath(spawnedenemy);
-        //});
+        spawnedenemyhealth.onDeath.AddListener(() =>
+        {
+            onenemydeath(spawnedenemy);
+        });
     }
-    //private void onenemydeath(GameObject enemy)
-    //{
-      //  enemieslist.Remove(enemy);
-        //if (enemieslist.Count == 0)
-        //{
-          //  spawnwave();
-        //}
-    //}
+    private void onenemydeath(GameObject enemy)
+    {
+        enemieslist.Remove(enemy);
+        if (enemieslist.Count == 0)
+        {
+            //spawnwave();  old piece of code
+            //add an event here to signal that player killed all enemies in teh wave
+        }
+    }
     private void spawnwave()
     {
         picker(spawn1);
