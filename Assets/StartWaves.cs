@@ -14,7 +14,14 @@ public class StartWaves : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
+        //if (Input.GetKeyDown(KeyCode.T))
+        //{
+          //  gm.GetComponent<WaveCode>().enabled = true;
+        //}
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
         {
             gm.GetComponent<WaveCode>().enabled = true;
         }
