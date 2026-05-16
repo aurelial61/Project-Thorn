@@ -1,23 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WaveCode : MonoBehaviour
 {
+    public UnityEvent EndWave;
     public GameObject enemy1;
     public GameObject enemy2;
-    public Vector3 spawn1; //spawn points for the waves
-    public Vector3 spawn2;
-    public Vector3 spawn3;
-    public Vector3 spawn4;
-    public Vector3 spawn5;
-    public Vector3 spawn6;
+    public Vector3[] locations;
     public int number;
-    public List<GameObject> enemieslist = new List<GameObject>();
+    public List<GameObject> enemiesList = new List<GameObject>();
     // Start is called before the first frame update
     void OnEnable()
     {
-        spawnwave();
+        
     }
 
     // Update is called once per frame
@@ -25,42 +22,52 @@ public class WaveCode : MonoBehaviour
     {
         
     }
-    private void picker(Vector3 spawnpoint)
+    private void Picker(Vector3 spawnpoint, int mode)
     {
         number = Random.Range(1, 3);
-        GameObject spawnedenemy;
-        if (number == 1)
+        GameObject spawnedEnemy;
+        if ((number == 1 && mode != 2) || (mode == 1))
         {
-            spawnedenemy = Instantiate(enemy1, spawnpoint, Quaternion.identity);
+            spawnedEnemy = Instantiate(enemy1, spawnpoint, Quaternion.identity);
             
         }
         else
         {
-            spawnedenemy = Instantiate(enemy2, spawnpoint, Quaternion.identity);
+            spawnedEnemy = Instantiate(enemy2, spawnpoint, Quaternion.identity);
         }
-        enemieslist.Add(spawnedenemy);
-        Health spawnedenemyhealth = spawnedenemy.GetComponent<Health>();
-        spawnedenemyhealth.onDeath.AddListener(() =>
+        enemiesList.Add(spawnedEnemy);
+        Health spawnedEnemyhealth = spawnedEnemy.GetComponent<Health>();
+        spawnedEnemyhealth.onDeath.AddListener(() =>
         {
-            onenemydeath(spawnedenemy);
+            onEnemyDeath(spawnedEnemy);
         });
     }
-    private void onenemydeath(GameObject enemy)
+    private void onEnemyDeath(GameObject enemy)
     {
-        enemieslist.Remove(enemy);
-        if (enemieslist.Count == 0)
+        enemiesList.Remove(enemy);
+        if (enemiesList.Count == 0)
         {
             //spawnwave();  old piece of code
             //add an event here to signal that player killed all enemies in teh wave
+            EndWave.Invoke();
         }
     }
-    private void spawnwave()
+    public void spawnwave(Vector3[] enemyLocations, int[] enemyMode)
     {
-        picker(spawn1);
-        picker(spawn2);
-        picker(spawn3);
-        picker(spawn4);
-        picker(spawn5);
-        picker(spawn6);
+        // enemyMode 0 = random. enemyMode 1 = all spear enemies. enemyMode 2 = all bombfish
+        for (int i = 0; i < enemyLocations.Length; i++)
+        {
+            Picker(enemyLocations[i], enemyMode[i]);
+        }
+    }
+    
+    public void spawnwave(int enemyMode)
+    {
+        int[] mode = new int[locations.Length];
+        for (int i = 0; i < locations.Length; i++)
+        {
+            mode[i] = enemyMode;
+        }
+        spawnwave(locations, mode);
     }
 }
