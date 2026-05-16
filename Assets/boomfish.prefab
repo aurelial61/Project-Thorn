@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 8159390922360912533}
   - component: {fileID: 3079247810004914353}
   - component: {fileID: 929386181129831116}
+  - component: {fileID: 7467150923558594114}
   m_Layer: 0
   m_Name: boomfish
   m_TagString: Untagged
@@ -96,7 +97,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1b5b0b50df4c9aa4aaa9b5e24546e4b8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -151,16 +152,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 065c7b3ebe459e94480c58832052ca46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  me: {fileID: 0}
   player: {fileID: 0}
-  speed: 5
+  speed: 10
   rangedetect: 15
   rangeboom: 2
   orbit: {fileID: 1877155868039994057}
   explosion: {fileID: 1577389394672208102, guid: 7120dcbceecc7574081723f0992af10f, type: 3}
   rotationspeed: 90
   rotationaxis: {x: 0, y: 1, z: 0}
-  damageMat: {fileID: 0}
-  defaultMat: {fileID: 0}
+  gm: {fileID: 0}
+  damageMat: {fileID: 2100000, guid: 1b5b0b50df4c9aa4aaa9b5e24546e4b8, type: 2}
+  defaultMat: {fileID: -2653651044934150266, guid: dfe4644155eb9a043931d539dcdfa9fa, type: 3}
+  expDamage: {fileID: 3274346930928184382, guid: f5583c0e560e4da40bd20f0e38a01eff, type: 3}
+  turnSpeed: 2
 --- !u!114 &929386181129831116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,3 +213,30 @@ MonoBehaviour:
   onHeal:
     m_PersistentCalls:
       m_Calls: []
+--- !u!54 &7467150923558594114
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5464421694144603515}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

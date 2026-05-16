@@ -17,6 +17,8 @@ public class boomfish : MonoBehaviour
     public GameManagerScript gm;
     public Material damageMat;
     public Material defaultMat;
+    public GameObject expDamage;
+    public float turnSpeed = 20f;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,8 +32,13 @@ public class boomfish : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, player.position) < rangedetect) //it takes distance from player to fish and constantly checks if it is lower than range
         { //therefore when it is lower than range, means it is in range
-            transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
-            transform.LookAt(player); //then it follows the player around with the line above
+            
+            Vector3 relativePos = player.position - transform.position;
+            Quaternion toRotation = Quaternion.LookRotation(relativePos);
+            transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, turnSpeed * Time.deltaTime);
+            transform.position += transform.forward * speed * Time.deltaTime;
+
+            //then it follows the player around with the line above
         } // and rotates to look at player with line above
         else
         {
@@ -62,10 +69,13 @@ public class boomfish : MonoBehaviour
 
     public void explode()
     {
+        /*
         if (Vector3.Distance(transform.position, player.position) < rangeboom)
         {
             player.gameObject.GetComponent<Health>().currentHP -= 4;
         }
+        */
+        Instantiate(expDamage, transform.position, Quaternion.identity);
         Instantiate(explosion, transform.position, Quaternion.identity);
         Destroy(gameObject);//here it kills itselfs
                             //add a damagin line here if you want player to take damage 
@@ -76,5 +86,10 @@ public class boomfish : MonoBehaviour
     {
         
         damageTimer = 0.1f;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        explode();
     }
 }

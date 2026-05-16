@@ -5,10 +5,13 @@ using UnityEngine;
 public class StartWaves : MonoBehaviour
 {
     public GameObject gm;
+    public WaveCode spawn;
+    bool spawned;
     // Start is called before the first frame update
     void Start()
     {
         gm.GetComponent<WaveCode>().enabled = false;
+        spawned = false;
     }
 
     // Update is called once per frame
@@ -21,9 +24,10 @@ public class StartWaves : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && ! spawned)
         {
-            gm.GetComponent<WaveCode>().enabled = true;
+            spawn.spawnwave(0);
+            spawned = true;
         }
     }
 }
