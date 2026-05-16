@@ -15,7 +15,7 @@ public class WaveCode : MonoBehaviour
     public int number;
     public List<GameObject> enemieslist = new List<GameObject>();
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         spawnwave();
     }
