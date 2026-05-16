@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class boomfish : MonoBehaviour
 {
-    public Transform player; // make sure to assign the player
+    public GameObject me;
+    public Transform player;
     public float speed;
     public float rangedetect; //change range values to liking
     public float rangeboom;
@@ -19,7 +20,9 @@ public class boomfish : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         player = GameObject.Find("Player").transform;
+
     }
 
     // Update is called once per frame
