@@ -6,7 +6,7 @@ public class WaveCode : MonoBehaviour
 {
     public GameObject enemy1;
     public GameObject enemy2;
-    public Vector3 spawn1;
+    public Vector3 spawn1; //spawn points for the waves
     public Vector3 spawn2;
     public Vector3 spawn3;
     public Vector3 spawn4;
