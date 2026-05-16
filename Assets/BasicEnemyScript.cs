@@ -100,7 +100,9 @@ public class BasicEnemyScript : MonoBehaviour
         {
             Instantiate(HPRestore, transform.position, Quaternion.identity);
         }
+        /*
         gm.EnemyDeath();
+        */
         Destroy(gameObject);
     }
 

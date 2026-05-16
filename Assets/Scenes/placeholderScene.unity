@@ -1434,6 +1434,8 @@ GameObject:
   - component: {fileID: 1608328538}
   - component: {fileID: 1608328537}
   - component: {fileID: 1608328539}
+  - component: {fileID: 1608328541}
+  - component: {fileID: 1608328540}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1463,6 +1465,7 @@ MonoBehaviour:
   spawnDivisor: 0
   originalSpawnValue: 0
   spawnTimer: 0
+  numEnemies: 0
 --- !u!4 &1608328538
 Transform:
   m_ObjectHideFlags: 0
@@ -1574,6 +1577,41 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1608328540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1608328536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c80c2bb0ae1acd41852b336965fba50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gm: {fileID: 1608328536}
+--- !u!114 &1608328541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1608328536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1d942c8ebeadb44b8c52c97c35e938e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy1: {fileID: 5894330333001522827, guid: 19439db2ce3ab2a44af49db779d1c153, type: 3}
+  enemy2: {fileID: 5464421694144603515, guid: 0a1c87f92937c8548b5f5dec9a08406e, type: 3}
+  spawn1: {x: 10, y: 1, z: 10}
+  spawn2: {x: 0, y: 1, z: 10}
+  spawn3: {x: -10, y: 1, z: 10}
+  spawn4: {x: 10, y: 1, z: 20}
+  spawn5: {x: 0, y: 1, z: 20}
+  spawn6: {x: -10, y: 1, z: 20}
+  number: 0
+  enemieslist: []
 --- !u!1 &2089493141
 GameObject:
   m_ObjectHideFlags: 0

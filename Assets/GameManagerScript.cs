@@ -27,6 +27,7 @@ public class GameManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (spawnTimer >= (originalSpawnValue / spawnDivisor))
         {
             Vector3 dir = Random.insideUnitSphere;
@@ -45,6 +46,7 @@ public class GameManagerScript : MonoBehaviour
             spawnTimer = 0;
         }
         spawnTimer += Time.deltaTime;
+        */
         if (gameOver)
         {
             gameOverText.text = "GAME OVER";
