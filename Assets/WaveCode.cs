@@ -6,7 +6,7 @@ public class WaveCode : MonoBehaviour
 {
     public GameObject enemy1;
     public GameObject enemy2;
-    public Vector3 spawn1;
+    public Vector3 spawn1; //spawn points for the waves
     public Vector3 spawn2;
     public Vector3 spawn3;
     public Vector3 spawn4;
@@ -15,7 +15,7 @@ public class WaveCode : MonoBehaviour
     public int number;
     public List<GameObject> enemieslist = new List<GameObject>();
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         spawnwave();
     }
@@ -50,7 +50,8 @@ public class WaveCode : MonoBehaviour
         enemieslist.Remove(enemy);
         if (enemieslist.Count == 0)
         {
-            spawnwave();
+            //spawnwave();  old piece of code
+            //add an event here to signal that player killed all enemies in teh wave
         }
     }
     private void spawnwave()
