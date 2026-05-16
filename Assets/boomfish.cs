@@ -94,4 +94,9 @@ public class boomfish : MonoBehaviour
     {
         explode();
     }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
 }

@@ -186,7 +186,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3079247810004914353}
         m_TargetAssemblyTypeName: boomfish, Assembly-CSharp
-        m_MethodName: explode
+        m_MethodName: Die
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
