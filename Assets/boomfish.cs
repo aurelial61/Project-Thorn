@@ -78,7 +78,7 @@ public class boomfish : MonoBehaviour
         */
         Instantiate(expDamage, transform.position, Quaternion.identity);
         Instantiate(explosion, transform.position, Quaternion.identity);
-        health.TakeDamage(10);//here it kills itselfs
+        health.TakeDamage(67);//here it kills itselfs
         
                             //add a damagin line here if you want player to take damage 
                             //also if you want add an animation somwhere here of fish going boom
