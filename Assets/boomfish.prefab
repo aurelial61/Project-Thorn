@@ -166,6 +166,7 @@ MonoBehaviour:
   defaultMat: {fileID: -2653651044934150266, guid: dfe4644155eb9a043931d539dcdfa9fa, type: 3}
   expDamage: {fileID: 3274346930928184382, guid: f5583c0e560e4da40bd20f0e38a01eff, type: 3}
   turnSpeed: 2
+  health: {fileID: 929386181129831116}
 --- !u!114 &929386181129831116
 MonoBehaviour:
   m_ObjectHideFlags: 0
