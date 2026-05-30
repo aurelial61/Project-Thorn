@@ -315,7 +315,7 @@ GameObject:
   - component: {fileID: 6070578485574223042}
   - component: {fileID: 536526451704243311}
   m_Layer: 0
-  m_Name: testEnemy (8)
+  m_Name: testEnemy (8) 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -331,7 +331,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -10, y: -10, z: 0}
-  m_LocalScale: {x: 0.73483, y: 0.73483, z: 0.73483}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4872412020563912681}
@@ -369,7 +369,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1b5b0b50df4c9aa4aaa9b5e24546e4b8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -426,19 +426,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idleSpeed: 2
   damageTimer: 0
-  damageMat: {fileID: 2100000, guid: 1b5b0b50df4c9aa4aaa9b5e24546e4b8, type: 2}
-  defaultMat: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  damageMat: {fileID: 2100000, guid: 55821b000096af6419fd0f63567f8483, type: 2}
+  defaultMat: {fileID: 2100000, guid: 1b5b0b50df4c9aa4aaa9b5e24546e4b8, type: 2}
   chargeForce: 0
-  swimSpeed: 5
+  swimSpeed: 10
   rotationSpeed: 10
-  aggroRange: 25
+  aggroRange: 100
   attackingRange: 2
-  attackAngle: 15
-  aggroAngle: 30
+  attackAngle: 40
+  aggroAngle: 100
   idleRotate: {x: 0, y: 1, z: 0}
   detect: {fileID: 6070578485574223042}
   HPRestore: {fileID: 460565439738925718, guid: 3201753d580b03f498e7437088a1ebda, type: 3}
   gm: {fileID: 0}
+  shortCD: 1
   harpoon: {fileID: 652115232872624172}
   harpoonPrefab: {fileID: 830135219803729308}
   hStartPos: {x: 0, y: 0, z: 0}
@@ -489,8 +490,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de156870457cc984b89222e03bc7f81f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 20
-  currentHP: 10
+  maxHP: 50
+  currentHP: 50
   onDeath:
     m_PersistentCalls:
       m_Calls:

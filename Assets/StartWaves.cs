@@ -6,6 +6,7 @@ public class StartWaves : MonoBehaviour
 {
     public GameObject gm;
     public WaveCode spawn;
+    public int option;
     bool spawned;
     // Start is called before the first frame update
     void Start()
@@ -26,7 +27,7 @@ public class StartWaves : MonoBehaviour
     {
         if (other.CompareTag("Player") && ! spawned)
         {
-            spawn.spawnwave(0);
+            spawn.spawnwave(option);
             spawned = true;
         }
     }

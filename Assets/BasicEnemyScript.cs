@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class BasicEnemyScript : MonoBehaviour
+public class BasicEnemyScript: MonoBehaviour
 {
     // Start is called before the first frame update
 
@@ -38,6 +38,7 @@ public class BasicEnemyScript : MonoBehaviour
     public Enemy1PreparingState preparingState;
     public GameObject HPRestore;
     public GameManagerScript gm;
+    public bool shortCD;
 
     [Header("Harpoon")]
     public GameObject harpoon;
@@ -59,7 +60,7 @@ public class BasicEnemyScript : MonoBehaviour
        idleState = new Enemy1IdleState(this, detect);
        followState = new Enemy1FollowState(this, detect);
        chargingState = new Enemy1ChargingState(this, detect);
-       cooldownState = new Enemy1CooldownState(this, detect);
+        cooldownState = new Enemy1CooldownState(this, detect, shortCD);
        attackingState = new Enemy1AttackingState(this, detect);
         rangedState = new Enemy1RangedState(this, detect);
         preparingState = new Enemy1PreparingState(this, detect);
